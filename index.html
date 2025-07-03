@@ -3,678 +3,935 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TB TrendVibe Boutique - Grand Opening</title>
+    <title>BugBoetiek - Grand Opening</title>
     <link rel="stylesheet" href="dist/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'JetBrains Mono', monospace;
-            background-color: #000000;
-            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            background-color: #fefefe;
+            color: #1a1a1a;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+            /* Hide scrollbar but keep functionality */
+            overflow-x: hidden;
         }
         
-        .luxury-gradient {
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+        /* Webkit scrollbar styling - hide scrollbar but keep scrolling */
+        body::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
         }
         
-        .blue-accent {
-            color: #ffffff;
+        body::-webkit-scrollbar-thumb {
+            background: transparent;
         }
         
-        .hover-blue:hover {
-            color: #ffffff;
+        /* For Firefox */
+        html {
+            scrollbar-width: none;
         }
         
-        .card-luxury {
-            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
-            border: 1px solid #333;
+        .font-serif {
+            font-family: 'Playfair Display', serif;
         }
         
-        .form-luxury {
-            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
-            border: 1px solid #333;
+        .text-ultra-minimal {
+            font-weight: 300;
+            letter-spacing: 0.05em;
         }
         
-        /* Enhanced Error Styling */
-        .error-border {
-            border: 2px solid #ef4444 !important;
-            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
-            animation: shake 0.5s ease-in-out;
+        .minimal-card {
+            background: #fafafa;
+            transition: all 0.3s ease;
         }
         
-        .error-message {
-            color: #ef4444;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            animation: slideDown 0.3s ease-out;
+        .minimal-card:hover {
+            transform: translateY(-2px);
         }
         
-        .error-message::before {
-            content: "⚠️";
-            margin-right: 8px;
-            animation: pulse 1s infinite;
+        .hero-overlay {
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3));
         }
         
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+        .nav-minimal {
+            background: rgba(254, 254, 254, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(27, 27, 27, 0.08);
         }
         
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .btn-minimal {
+            background: #1a1a1a;
+            color: #fefefe;
+            border: 1px solid #1a1a1a;
+            padding: 14px 32px;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .btn-minimal:hover {
+            background: #fbbf24;
+            color: #111827;
+            border-color: #fbbf24;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: #1a1a1a;
+            border: 1px solid #1a1a1a;
+        }
+        
+        .btn-outline:hover {
+            background: #fffbeb;
+            color: #1a1a1a;
+            border-color: #f59e0b;
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .text-minimal {
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.03em;
+            line-height: 1.6;
+            color: #4b5563;
+        }
+        
+        .hero-text {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 300;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+        }
+        
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 0;
+        }
+        
+        .product-card {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .product-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 30px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-overlay {
+            transform: translateY(0);
         }
         
         /* Mobile Menu Styles */
-        .mobile-menu-link {
-            transition: all 0.3s ease;
-            padding: 16px 24px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: 500;
-            min-height: 60px;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-        
-        .mobile-menu-link:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-        }
-        
-        #mobile-menu {
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            z-index: 9999 !important;
-        }
-        
-        #mobile-menu:not(.hidden) {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-        
-        #mobile-menu.show {
-            animation: fadeIn 0.3s ease-out;
-        }
-        
-        #mobile-menu .flex.flex-col {
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 400px;
-            padding: 20px;
+            height: 100vh;
+            background: rgba(255, 251, 235, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
         
-        /* Ensure mobile menu works on very small screens */
-        @media (max-width: 320px) {
-            #mobile-menu .flex.flex-col {
-                padding: 15px;
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-menu a {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            color: #1a1a1a;
+            text-decoration: none;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu a:hover {
+            opacity: 0.6;
+        }
+        
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .hamburger span {
+            width: 20px;
+            height: 1px;
+            background: #1a1a1a;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 3rem;
             }
             
-            #mobile-menu .flex.flex-col > * + * {
-                margin-top: 1.5rem;
-            }
-            
-            .mobile-menu-link {
-                font-size: 18px;
-                min-height: 50px;
-                padding: 12px 16px;
+            .section-padding {
+                padding: 50px 0;
             }
         }
         
-        /* Ensure mobile menu button is always visible on mobile */
-        @media (max-width: 767px) {
-            #mobile-menu-button {
-                display: block !important;
-                z-index: 60;
-                position: relative;
+        /* Additional House of Blanks inspired refinements */
+        .text-muted {
+            color: #6b7280;
+        }
+        
+        .border-subtle {
+            border-color: #e5e7eb;
+        }
+        
+        .hover-subtle:hover {
+            color: #6b7280;
+        }
+        
+        /* Light yellow accent color inspired by House of Blanks */
+        .accent-yellow {
+            background-color: #fffbeb;
+        }
+        
+        .text-accent-yellow {
+            color: #f59e0b;
+        }
+        
+        .border-accent-yellow {
+            border-color: #fef3c7;
+        }
+        
+        .hover-accent:hover {
+            background-color: #fffbeb;
+            transition: background-color 0.3s ease;
+        }
+        
+        /* Form styling */
+        .form-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #d1d5db;
+            padding: 0.75rem 0;
+            transition: all 0.3s ease;
+            color: #374151;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: #fbbf24;
+            box-shadow: 0 1px 0 0 #fbbf24;
+        }
+        
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+        
+        .form-input:invalid:not(:placeholder-shown) {
+            border-bottom-color: #ef4444;
+        }
+        
+        .form-input:valid:not(:placeholder-shown) {
+            border-bottom-color: #10b981;
+        }
+        
+        /* Hero carousel */
+        .hero-carousel {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .carousel-content {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+        
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        /* Epic Hero Section */
+        .hero-immersive {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .hero-image, .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 2s ease-in-out;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+        
+        .hero-video.show {
+            opacity: 1;
+        }
+        
+        .hero-overlay-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, rgba(245,158,11,0.2) 100%);
+            z-index: 2;
+        }
+        
+        .hero-content-center {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .hero-title-large {
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 300;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: white;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
             }
         }
         
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        /* Navigation scroll effects */
+        .nav-enhanced {
+            background: rgba(254, 254, 254, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(254, 243, 199, 0.3);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .nav-enhanced.visible {
+            transform: translateY(0);
+        }
+        
+        /* Hero buttons styling */
+        .hero-btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .hero-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 16px 32px;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .hero-btn:hover {
+            background: rgba(245, 158, 11, 0.8);
+            border-color: rgba(245, 158, 11, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+        }
+        
+        .hero-btn.secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .hero-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Hide scrollbars but maintain scroll functionality */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: transparent;
+        }
+        
+        html {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+        
+        body {
+            -webkit-overflow-scrolling: touch;
         }
     </style>
 </head>
-<body class="bg-black text-white">
+<body class="bg-gray-50 text-gray-900">
     <!-- Navigation -->
-    <nav class="luxury-gradient text-white p-4 sticky top-0 z-40 shadow-xl">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="font-bold flex items-center">
-                <i class="fas fa-gem text-white mr-2"></i>
-                <span class="text-2xl blue-accent">TB</span>
-                <span class="text-base"> TrendVibe Boutique</span>
-            </h1>
-            
-            <!-- Desktop Menu -->
-            <ul class="hidden md:flex space-x-6 text-base">
-                <li><a href="#home" class="hover-blue flex items-center"><i class="fas fa-home mr-1"></i>Home</a></li>
-                <li><a href="#opening" class="hover-blue flex items-center"><i class="fas fa-calendar-star mr-1"></i>Opening</a></li>
-                <li><a href="#clothing" class="hover-blue flex items-center"><i class="fas fa-tshirt mr-1"></i>Kleding</a></li>
-                <li><a href="#sustainability" class="hover-blue flex items-center"><i class="fas fa-leaf mr-1"></i>Duurzaamheid</a></li>
-                <li><a href="#contact" class="hover-blue flex items-center"><i class="fas fa-envelope mr-1"></i>Contact</a></li>
-            </ul>
-            
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
+    <nav class="nav-enhanced fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="font-serif text-2xl font-medium tracking-wide text-gray-900">
+                    BugBoetiek
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-12">
+                    <a href="#home" class="text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide">Home</a>
+                    <a href="#opening" class="text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide">Opening</a>
+                    <a href="#collectie" class="text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide">Collectie</a>
+                    <a href="#duurzaamheid" class="text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide">Duurzaamheid</a>
+                    <a href="#contact" class="text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-95 hidden">
-            <div class="flex flex-col items-center justify-center h-screen space-y-8 text-xl px-4">
-                <a href="#home" class="mobile-menu-link text-white hover-blue flex items-center w-full max-w-xs justify-center py-4"><i class="fas fa-home mr-2"></i>Home</a>
-                <a href="#opening" class="mobile-menu-link text-white hover-blue flex items-center w-full max-w-xs justify-center py-4"><i class="fas fa-calendar-star mr-2"></i>Opening</a>
-                <a href="#clothing" class="mobile-menu-link text-white hover-blue flex items-center w-full max-w-xs justify-center py-4"><i class="fas fa-tshirt mr-2"></i>Kleding</a>
-                <a href="#sustainability" class="mobile-menu-link text-white hover-blue flex items-center w-full max-w-xs justify-center py-4"><i class="fas fa-leaf mr-2"></i>Duurzaamheid</a>
-                <a href="#contact" class="mobile-menu-link text-white hover-blue flex items-center w-full max-w-xs justify-center py-4"><i class="fas fa-envelope mr-2"></i>Contact</a>
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="flex flex-col text-center">
+                <a href="#home">Home</a>
+                <a href="#opening">Opening</a>
+                <a href="#collectie">Collectie</a>
+                <a href="#duurzaamheid">Duurzaamheid</a>
+                <a href="#contact">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section with Carousel -->
-    <section id="home" class="relative">
-        <div class="carousel relative">
-            <div class="carousel-inner flex transition-transform duration-500 ease-in-out">
-                <!-- Placeholder for images -->
-                <div class="carousel-item w-full flex-shrink-0">
-                    <img src="assets/image copy 8.png" alt="Hippe horloge" class="w-full h-[600px] object-cover">
-                </div>
-                <div class="carousel-item w-full flex-shrink-0">
-                    <img src="assets/image copy 9.png" alt="Trendy Jacket" class="w-full h-[600px] object-cover">
-                </div>
-                <div class="carousel-item w-full flex-shrink-0">
-                    <img src="assets/image copy 13.png" alt="Chique Blouse" class="w-full h-[600px] object-cover">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                        <h2 class="text-4xl font-bold text-white">Be Part of Our Community</h2>
-                    </div>
-                </div>
+    <!-- Epic Hero Section -->
+    <section id="home" class="hero-immersive">
+        <!-- Background Media -->
+        <div class="hero-background">
+            <!-- Initial Image -->
+            <img src="assets/image copy 8.png" alt="BugBoetiek Fashion" class="hero-image" id="heroImage">
+            
+            <!-- Video (will fade in after delay) -->
+            <video class="hero-video" id="heroVideo" autoplay muted loop playsinline>
+                <source src="assets/CINEMATIC REAL ESTATE VIDEO _ MODERN LUXURY _ SONY FX3 & DJI MAVIC 3 PRO.mp4" type="video/mp4">
+                <!-- Fallback to external video if local file doesn't load -->
+                <source src="assets/CINEMATIC REAL ESTATE VIDEO _ MODERN LUXURY _ SONY FX3 & DJI MAVIC 3 PRO.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        <!-- Overlay -->
+        <div class="hero-overlay-gradient"></div>
+        
+        <!-- Hero Content -->
+        <div class="hero-content-center">
+            <h1 class="hero-title-large font-serif">
+                BugBoetiek
+            </h1>
+            <p class="hero-subtitle">
+                Minimalistisch • Modern • Duurzaam
+            </p>
+            <div class="hero-btn-group">
+                <a href="#opening" class="hero-btn">Ontdek Opening</a>
+                <a href="#collectie" class="hero-btn secondary">Bekijk Collectie</a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="flex flex-col items-center">
+                <span class="text-sm mb-2 font-light">Scroll om te verkennen</span>
+                <i class="fas fa-chevron-down text-xl"></i>
             </div>
         </div>
     </section>
 
     <!-- Opening Information -->
-    <section id="opening" class="py-16 bg-black">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <i class="fas fa-calendar-star text-6xl text-white mb-4"></i>
-                <h2 class="text-4xl font-bold text-white mb-4">Feestelijke Opening</h2>
-            </div>
-            <div class="max-w-4xl mx-auto">
-                <div class="card-luxury p-8 rounded-2xl shadow-2xl mb-8">
-                    <div class="text-center">
-                        <p class="text-xl mb-6 text-white">Kom naar de grand opening van <strong class="text-white">TB TrendVibe Boutique</strong> op <strong class="text-white">8 augustus 2024</strong> van <strong class="text-white">17:00 tot 23:00</strong>!</p>
-                        
-                        <div class="grid md:grid-cols-2 gap-6 mb-8">
-                            <div class="bg-gray-900 bg-opacity-60 p-6 rounded-xl">
-                                <h3 class="text-xl font-bold mb-4 text-white flex items-center justify-center">
-                                    <i class="fas fa-music mr-2"></i>Entertainment
-                                </h3>
-                                <ul class="space-y-2 text-white">
-                                    <li class="flex items-center"><i class="fas fa-microphone text-gray-300 mr-2"></i>Live DJ en livemuziek</li>
-                                    <li class="flex items-center"><i class="fas fa-cocktail text-gray-300 mr-2"></i>Gratis cocktail voor elke bezoeker</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-900 bg-opacity-60 p-6 rounded-xl">
-                                <h3 class="text-xl font-bold mb-4 text-white flex items-center justify-center">
-                                    <i class="fas fa-gift mr-2"></i>Speciale Aanbiedingen
-                                </h3>
-                                <ul class="space-y-2 text-white">
-                                    <li class="flex items-center"><i class="fas fa-percentage text-gray-300 mr-2"></i>Exclusieve aanbiedingen op onze collectie</li>
-                                    <li class="flex items-center"><i class="fas fa-hat-cowboy text-gray-300 mr-2"></i>Gratis cap voor de eerste 100 bezoekers!</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-gray-900 bg-opacity-60 p-6 rounded-xl mb-6">
-                            <p class="font-bold text-xl text-white flex items-center justify-center">
-                                <i class="fas fa-map-marker-alt mr-2"></i>Locatie: Kruiskade 88, Rotterdam
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Accessories Carousel Section -->
-    <section id="accessories" class="py-8 bg-black">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-6">
-                <i class="fas fa-gem text-3xl text-white mb-3"></i>
-                <h2 class="text-2xl font-bold text-white mb-3">Onze Collectie</h2>
-                <p class="text-gray-300 max-w-xl mx-auto">
-                    Ontdek onze exclusieve accessoire collectie.
+    <section id="opening" class="section-padding accent-yellow">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-light mb-6">Grand Opening</h2>
+                <p class="text-minimal max-w-2xl mx-auto mb-12">
+                    Vier met ons de opening van BugBoetiek op 8 augustus 2024. 
+                    Een avond vol mode, muziek en community.
                 </p>
             </div>
             
-            <div class="relative max-w-3xl mx-auto">
-                <div class="accessories-carousel relative overflow-hidden rounded-lg">
-                    <div class="accessories-carousel-inner flex transition-transform duration-500 ease-in-out">
-                        <!-- Accessory 1 -->
-                        <div class="accessories-carousel-item w-full flex-shrink-0">
-                            <div class="card-luxury rounded-lg overflow-hidden mx-3 h-64 flex flex-col">
-                                <div class="h-40 w-full overflow-hidden">
-                                    <img src="assets/image copy 6.png" alt="Luxe Handtas" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="p-4 text-center h-24 flex flex-col justify-between flex-1">
-                                    <h3 class="text-lg font-semibold text-white mb-1 flex items-center justify-center">
-                                        <i class="fas fa-shopping-bag text-gray-300 mr-2 text-sm"></i>Luxe Handtas
-                                    </h3>
-                                    <p class="text-gray-300 text-sm">Elegante handtas</p>
-                                    <p class="text-white font-bold">€89,99</p>
-                                </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="mb-8">
+                        <h3 class="font-serif text-2xl font-medium mb-4">08 Augustus 2024</h3>
+                        <p class="text-minimal mb-6">17:00 - 23:00<br>Kruiskade 88, Rotterdam</p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4 hover-accent p-3 rounded-lg transition-colors">
+                            <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div>
+                                <h4 class="font-medium mb-1 text-gray-900">Live Entertainment</h4>
+                                <p class="text-minimal">DJ en livemuziek de hele avond</p>
                             </div>
                         </div>
                         
-                        <!-- Accessory 2 -->
-                        <div class="accessories-carousel-item w-full flex-shrink-0">
-                            <div class="card-luxury rounded-lg overflow-hidden mx-3 h-64 flex flex-col">
-                                <div class="h-40 w-full overflow-hidden">
-                                    <img src="assets/image copy 8.png" alt="Designer Horloge" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="p-4 text-center h-24 flex flex-col justify-between flex-1">
-                                    <h3 class="text-lg font-semibold text-white mb-1 flex items-center justify-center">
-                                        <i class="fas fa-clock text-gray-300 mr-2 text-sm"></i>Designer Horloge
-                                    </h3>
-                                    <p class="text-gray-300 text-sm">Stijlvol horloge</p>
-                                    <p class="text-white font-bold">€149,99</p>
-                                </div>
+                        <div class="flex items-start space-x-4 hover-accent p-3 rounded-lg transition-colors">
+                            <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div>
+                                <h4 class="font-medium mb-1 text-gray-900">Gratis Cocktails</h4>
+                                <p class="text-minimal">Welkomstdrankje voor elke bezoeker</p>
                             </div>
                         </div>
                         
-                        <!-- Accessory 3 -->
-                        <div class="accessories-carousel-item w-full flex-shrink-0">
-                            <div class="card-luxury rounded-lg overflow-hidden mx-3 h-64 flex flex-col">
-                                <div class="h-40 w-full overflow-hidden">
-                                    <img src="assets/image.png" alt="Statement Ketting" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="p-4 text-center h-24 flex flex-col justify-between flex-1">
-                                    <h3 class="text-lg font-semibold text-white mb-1 flex items-center justify-center">
-                                        <i class="fas fa-gem text-gray-300 mr-2 text-sm"></i>Statement Ketting
-                                    </h3>
-                                    <p class="text-gray-300 text-sm">Opvallende ketting</p>
-                                    <p class="text-white font-bold">€59,99</p>
-                                </div>
+                        <div class="flex items-start space-x-4 hover-accent p-3 rounded-lg transition-colors">
+                            <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div>
+                                <h4 class="font-medium mb-1 text-gray-900">Exclusieve Aanbiedingen</h4>
+                                <p class="text-minimal">Speciale kortingen op opening</p>
                             </div>
                         </div>
                         
-                        <!-- Accessory 4 -->
-                        <div class="accessories-carousel-item w-full flex-shrink-0">
-                            <div class="card-luxury rounded-lg overflow-hidden mx-3 h-64 flex flex-col">
-                                <div class="h-40 w-full overflow-hidden">
-                                    <img src="assets/image copy 14.png" alt="Trendy Zonnebril" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="p-4 text-center h-24 flex flex-col justify-between flex-1">
-                                    <h3 class="text-lg font-semibold text-white mb-1 flex items-center justify-center">
-                                        <i class="fas fa-glasses text-gray-300 mr-2 text-sm"></i>Trendy Zonnebril
-                                    </h3>
-                                    <p class="text-gray-300 text-sm">Hippe zonnebril</p>
-                                    <p class="text-white font-bold">€79,99</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Accessory 5 -->
-                        <div class="accessories-carousel-item w-full flex-shrink-0">
-                            <div class="card-luxury rounded-lg overflow-hidden mx-3 h-64 flex flex-col">
-                                <div class="h-40 w-full overflow-hidden">
-                                    <img src="assets/image copy.png" alt="Leren Riem" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="p-4 text-center h-24 flex flex-col justify-between flex-1">
-                                    <h3 class="text-lg font-semibold text-white mb-1 flex items-center justify-center">
-                                        <i class="fas fa-user-tie text-gray-300 mr-2 text-sm"></i>Leren Riem
-                                    </h3>
-                                    <p class="text-gray-300 text-sm">Premium leren riem</p>
-                                    <p class="text-white font-bold">€49,99</p>
-                                </div>
+                        <div class="flex items-start space-x-4 hover-accent p-3 rounded-lg transition-colors">
+                            <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div>
+                                <h4 class="font-medium mb-1 text-gray-900">Gratis Cap</h4>
+                                <p class="text-minimal">Voor de eerste 100 bezoekers</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Carousel indicators -->
-                <div class="flex justify-center mt-4 space-x-2">
-                    <button class="accessories-indicator w-2 h-2 rounded-full bg-gray-600 hover:bg-white transition-colors" data-slide="0"></button>
-                    <button class="accessories-indicator w-2 h-2 rounded-full bg-gray-600 hover:bg-white transition-colors" data-slide="1"></button>
-                    <button class="accessories-indicator w-2 h-2 rounded-full bg-gray-600 hover:bg-white transition-colors" data-slide="2"></button>
-                    <button class="accessories-indicator w-2 h-2 rounded-full bg-gray-600 hover:bg-white transition-colors" data-slide="3"></button>
-                    <button class="accessories-indicator w-2 h-2 rounded-full bg-gray-600 hover:bg-white transition-colors" data-slide="4"></button>
+                <div class="minimal-card border border-accent-yellow">
+                    <img src="assets/image copy 9.png" alt="Opening Event" class="w-full h-96 object-cover">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Clothing Collection -->
-    <section id="clothing" class="py-16 bg-black">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <i class="fas fa-tshirt text-6xl text-white mb-4"></i>
-                <h2 class="text-4xl font-bold text-white mb-4">Onze Collectie</h2>
-                <div class="card-luxury p-6 rounded-xl max-w-3xl mx-auto">
-                    <p class="text-lg text-white">Ontdek onze trendy en duurzame kledingcollectie, perfect voor de moderne garderobe.</p>
-                </div>
+    <!-- Fashion Collection -->
+    <section id="collectie" class="section-padding bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-light mb-6">Onze Collectie</h2>
+                <p class="text-minimal max-w-3xl mx-auto">
+                    Zorgvuldig geselecteerde stukken voor de moderne garderobe. 
+                    Tijdloos design ontmoet duurzame productie.
+                </p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="card-luxury rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-                    <img src="assets/image copy.png" alt="Blazers" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white flex items-center mb-2">
-                            <i class="fas fa-user-tie text-gray-300 mr-2"></i>Blazers
-                        </h3>
-                        <p class="text-gray-300">Stijlvolle en veelzijdige blazers voor elke gelegenheid.</p>
+            
+            <!-- Collection Grid -->
+            <div class="collection-grid">
+                <!-- Product 1 -->
+                <div class="product-card group">
+                    <img src="assets/image copy.png" alt="Blazers & Jackets" class="w-full h-full object-cover">
+                    <div class="product-overlay">
+                        <h3 class="font-serif text-xl mb-2">Blazers & Jackets</h3>
+                        <p class="text-minimal text-white/80">Stijlvolle bovenkleding voor elke gelegenheid</p>
                     </div>
                 </div>
-                <div class="card-luxury rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-                    <img src="assets/image copy 3.png" alt="Jurken" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white flex items-center mb-2">
-                            <i class="fas fa-female text-gray-300 mr-2"></i>Jurken
-                        </h3>
-                        <p class="text-gray-300">Elegante jurken, van casual tot chique.</p>
+                
+                <!-- Product 2 -->
+                <div class="product-card group">
+                    <img src="assets/image copy 3.png" alt="Dresses & Skirts" class="w-full h-full object-cover">
+                    <div class="product-overlay">
+                        <h3 class="font-serif text-xl mb-2">Jurken & Rokken</h3>
+                        <p class="text-minimal text-white/80">Elegante silhouetten voor elke dag</p>
                     </div>
                 </div>
-                <div class="card-luxury rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-                    <img src="assets/image copy 4.png" alt="Sneakers" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white flex items-center mb-2">
-                            <i class="fas fa-running text-gray-300 mr-2"></i>Sneakers
-                        </h3>
-                        <p class="text-gray-300">Comfortabele en hippe sneakers voor dagelijks gebruik.</p>
+                
+                <!-- Product 3 -->
+                <div class="product-card group">
+                    <img src="assets/image copy 4.png" alt="Footwear" class="w-full h-full object-cover">
+                    <div class="product-overlay">
+                        <h3 class="font-serif text-xl mb-2">Schoenen</h3>
+                        <p class="text-minimal text-white/80">Van sneakers tot elegante pumps</p>
                     </div>
                 </div>
-                <div class="card-luxury rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-                    <img src="assets/image copy 5.png" alt="Jeans" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white flex items-center mb-2">
-                            <i class="fas fa-user text-gray-300 mr-2"></i>Jeans
-                        </h3>
-                        <p class="text-gray-300">Moderne jeans met een perfecte pasvorm.</p>
+                
+                <!-- Product 4 -->
+                <div class="product-card group">
+                    <img src="assets/image copy 5.png" alt="Denim & Pants" class="w-full h-full object-cover">
+                    <div class="product-overlay">
+                        <h3 class="font-serif text-xl mb-2">Broeken & Denim</h3>
+                        <p class="text-minimal text-white/80">Perfecte pasvorm in duurzame materialen</p>
                     </div>
                 </div>
-                <div class="card-luxury rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-                    <img src="assets/image copy 6.png" alt="Accessoires" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white flex items-center mb-2">
-                            <i class="fas fa-shopping-bag text-gray-300 mr-2"></i>Accessoires
-                        </h3>
-                        <p class="text-gray-300">Tassen, sieraden en meer om je look af te maken.</p>
+                
+                <!-- Product 5 -->
+                <div class="product-card group">
+                    <img src="assets/image copy 6.png" alt="Accessories" class="w-full h-full object-cover">
+                    <div class="product-overlay">
+                        <h3 class="font-serif text-xl mb-2">Accessoires</h3>
+                        <p class="text-minimal text-white/80">Tassen, sieraden en meer</p>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card group">
+                    <img src="assets/image copy 8.png" alt="Watches & Jewelry" class="w-full h-full object-cover">
+                    <div class="product-overlay">
+                        <h3 class="font-serif text-xl mb-2">Horloges & Sieraden</h3>
+                        <p class="text-minimal text-white/80">Tijdloze elegantie voor elke pols</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sustainability Section -->
-    <section id="sustainability" class="py-16 bg-black">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <i class="fas fa-leaf text-6xl text-white mb-4"></i>
-                <h2 class="text-4xl font-bold text-white mb-8">Duurzaamheid & Community</h2>
-            </div>
-            <div class="max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="card-luxury p-8 rounded-xl">
-                        <div class="text-center">
-                            <i class="fas fa-recycle text-4xl text-white mb-4"></i>
-                            <h3 class="text-2xl font-bold text-white mb-4">Duurzame Mode</h3>
-                            <p class="text-gray-300 leading-relaxed">Bij <strong class="text-white">TB TrendVibe Boutique</strong> zijn we toegewijd aan duurzaamheid. Onze kleding is gemaakt van milieuvriendelijke materialen en we streven naar een circulaire mode-industrie.</p>
+    <!-- Sustainability & Community Section -->
+    <section id="duurzaamheid" class="section-padding bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <!-- Text Content -->
+                <div>
+                    <h2 class="font-serif text-4xl md:text-5xl font-light mb-8">
+                        Duurzaamheid & Community
+                    </h2>
+                    <p class="text-minimal mb-8">
+                        BugBoetiek staat voor meer dan alleen mode. We geloven in een toekomst 
+                        waar fashion en verantwoordelijkheid hand in hand gaan.
+                    </p>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="font-serif text-xl font-medium mb-3">Circulaire Mode</h3>
+                            <p class="text-minimal">
+                                Onze collectie bestaat uit milieuvriendelijke materialen en 
+                                ethisch geproduceerde kleding. Kwaliteit boven kwantiteit.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-serif text-xl font-medium mb-3">Community Platform</h3>
+                            <p class="text-minimal">
+                                Word lid van onze community voor kledingverkoop en -ruil. 
+                                Geef je garderobe een tweede leven.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-serif text-xl font-medium mb-3">Ons Doel</h3>
+                            <p class="text-minimal">
+                                100% circulaire mode tegen 2030. Elke aankoop draagt bij 
+                                aan een duurzamere fashion industrie.
+                            </p>
                         </div>
                     </div>
-                    <div class="card-luxury p-8 rounded-xl">
-                        <div class="text-center">
-                            <i class="fas fa-users text-4xl text-white mb-4"></i>
-                            <h3 class="text-2xl font-bold text-white mb-4">Community Platform</h3>
-                            <p class="text-gray-300 leading-relaxed">Word lid van onze community! We bieden een platform voor kledingverkoop en -ruil, zodat je jouw garderobe kunt vernieuwen op een duurzame manier.</p>
-                        </div>
+                    
+                    <div class="flex space-x-6 mt-12">
+                        <a href="#" class="text-gray-800 hover:opacity-60 transition-opacity">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-800 hover:opacity-60 transition-opacity">
+                            <i class="fab fa-facebook text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-800 hover:opacity-60 transition-opacity">
+                            <i class="fab fa-twitter text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-800 hover:opacity-60 transition-opacity">
+                            <i class="fab fa-tiktok text-2xl"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="card-luxury p-8 rounded-xl mt-8 text-center">
-                    <i class="fas fa-share-alt text-3xl text-white mb-4"></i>
-                    <p class="text-lg text-white">Volg ons op social media om deel te nemen aan onze initiatieven en evenementen!</p>
-                    <div class="flex justify-center space-x-6 mt-6">
-                        <a href="#" class="text-white hover:text-gray-300 text-2xl transition-colors"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white hover:text-gray-300 text-2xl transition-colors"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-white hover:text-gray-300 text-2xl transition-colors"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white hover:text-gray-300 text-2xl transition-colors"><i class="fab fa-tiktok"></i></a>
-                    </div>
+                
+                <!-- Image -->
+                <div class="minimal-card border border-accent-yellow">
+                    <img src="assets/image copy 13.png" alt="Sustainability" class="w-full h-96 object-cover">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-black">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <i class="fas fa-envelope text-6xl text-white mb-4"></i>
-                <h2 class="text-4xl font-bold text-white mb-4">Contacteer Ons</h2>
+    <section id="contact" class="section-padding bg-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-light mb-6">Contact</h2>
+                <p class="text-minimal max-w-2xl mx-auto">
+                    Heb je vragen over onze opening, collectie of duurzaamheidsinitiatieven? 
+                    We horen graag van je.
+                </p>
             </div>
-            <form id="contact-form" class="max-w-lg mx-auto form-luxury p-8 rounded-2xl shadow-2xl">
-                <div class="mb-4">
-                    <label for="voornaam" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-user text-gray-300 mr-2"></i>Voornaam *
-                    </label>
-                    <input type="text" id="voornaam" name="voornaam" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
-                    <p id="voornaam-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
-                </div>
-                <div class="mb-4">
-                    <label for="achternaam" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-user text-gray-300 mr-2"></i>Achternaam *
-                    </label>
-                    <input type="text" id="achternaam" name="achternaam" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
-                    <p id="achternaam-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
-                </div>
-                <div class="mb-4">
-                    <label for="geslacht" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-venus-mars text-gray-300 mr-2"></i>Geslacht *
-                    </label>
-                    <select id="geslacht" name="geslacht" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
-                        <option value="">Selecteer geslacht</option>
-                        <option value="man">Man</option>
-                        <option value="vrouw">Vrouw</option>
-                        <option value="anders">Anders</option>
-                        <option value="zeg-ik-liever-niet">Zeg ik liever niet</option>
-                    </select>
-                    <p id="geslacht-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
-                </div>
-                <div class="mb-4">
-                    <label for="geboortedatum" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-calendar text-gray-300 mr-2"></i>Geboortedatum *
-                    </label>
-                    <input type="date" id="geboortedatum" name="geboortedatum" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
-                    <p id="geboortedatum-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
-                </div>
-                <div class="mb-4">
-                    <label for="telefoon" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-phone text-gray-300 mr-2"></i>Telefoonnummer *
-                    </label>
-                    <input type="tel" id="telefoon" name="telefoon" required pattern="(\+31|0)[0-9]{9}" placeholder="+31612345678" class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
-                    <p id="telefoon-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-at text-gray-300 mr-2"></i>E-mailadres *
-                    </label>
-                    <input type="email" id="email" name="email" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
-                    <p id="email-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
-                </div>
-                <div class="mb-4">
-                    <label for="adres" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-home text-gray-300 mr-2"></i>Adres *
-                    </label>
-                    <input type="text" id="adres" name="adres" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white" placeholder="Straatnaam en huisnummer">
-                    <p id="adres-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
-                </div>
-                <div class="mb-4">
-                    <label for="postcode" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-mail-bulk text-gray-300 mr-2"></i>Postcode *
-                    </label>
-                    <input type="text" id="postcode" name="postcode" required pattern="[0-9]{4}[A-Za-z]{2}" placeholder="1234AB" class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
-                    <p id="postcode-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
-                </div>
-                <div class="mb-4">
-                    <label for="woonplaats" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-city text-gray-300 mr-2"></i>Woonplaats *
-                    </label>
-                    <input type="text" id="woonplaats" name="woonplaats" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
-                    <p id="woonplaats-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
-                </div>
-                <div class="mb-4">
-                    <label for="kledingmaat" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-ruler text-gray-300 mr-2"></i>Voorkeurs Kledingmaat
-                    </label>
-                    <select id="kledingmaat" name="kledingmaat" class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
-                        <option value="">Selecteer maat</option>
-                        <option value="xs">XS</option>
-                        <option value="s">S</option>
-                        <option value="m">M</option>
-                        <option value="l">L</option>
-                        <option value="xl">XL</option>
-                        <option value="xxl">XXL</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="budget" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-euro-sign text-gray-300 mr-2"></i>Budget per aankoop
-                    </label>
-                    <input type="range" id="budget" name="budget" min="25" max="500" value="100" class="mt-1 block w-full">
-                    <div class="flex justify-between text-sm text-gray-300 mt-1">
-                        <span>€25</span>
-                        <span id="budget-value">€100</span>
-                        <span>€500</span>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-heart text-gray-300 mr-2"></i>Interesse in
-                    </label>
-                    <div class="space-y-2">
-                        <label class="flex items-center">
-                            <input type="checkbox" name="interesse[]" value="herenkleding" class="mr-2 text-black focus:ring-black">
-                            <span class="text-white">Herenkleding</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="interesse[]" value="dameskleding" class="mr-2 text-black focus:ring-black">
-                            <span class="text-white">Dameskleding</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="interesse[]" value="accessoires" class="mr-2 text-black focus:ring-black">
-                            <span class="text-white">Accessoires</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="interesse[]" value="schoenen" class="mr-2 text-black focus:ring-black">
-                            <span class="text-white">Schoenen</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="onderwerp" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-tag text-gray-300 mr-2"></i>Onderwerp *
-                    </label>
-                    <select id="onderwerp" name="onderwerp" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
-                        <option value="">Selecteer onderwerp</option>
-                        <option value="algemeen">Algemene vraag</option>
-                        <option value="opening">Vraag over de opening</option>
-                        <option value="kleding">Vraag over kleding</option>
-                        <option value="duurzaamheid">Vraag over duurzaamheid</option>
-                        <option value="bestelling">Bestelling plaatsen</option>
-                        <option value="retour">Retour/Ruil</option>
-                    </select>
-                    <p id="onderwerp-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
-                </div>
-                <div class="mb-4">
-                    <label class="flex items-center">
-                        <input type="checkbox" id="nieuwsbrief" name="nieuwsbrief" value="ja" class="mr-2 text-black focus:ring-black">
-                        <span class="text-white">Ik wil graag de nieuwsbrief ontvangen</span>
-                    </label>
-                </div>
-                <div class="mb-6">
-                    <label for="vraag" class="text-sm font-medium text-white mb-2 flex items-center">
-                        <i class="fas fa-comment text-gray-300 mr-2"></i>Uw bericht *
-                    </label>
-                    <textarea id="vraag" name="vraag" required rows="5" class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white" placeholder="Vertel ons wat we voor u kunnen betekenen..."></textarea>
-                    <p id="vraag-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
-                </div>
-                <button type="submit" class="w-full bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-md font-semibold transition-all duration-300 flex items-center justify-center">
-                    <i class="fas fa-paper-plane mr-2"></i>Verzenden
-                </button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="luxury-gradient text-white py-12 border-t border-gray-600">
-        <div class="container mx-auto px-4">
-            <!-- Visit Our Shop Section -->
-            <div class="mb-12">
-                <div class="text-center mb-8">
-                    <i class="fas fa-store text-4xl text-white mb-4"></i>
-                    <h3 class="text-3xl font-bold text-white mb-4">Bezoek Onze Winkel</h3>
-                    <p class="text-lg text-gray-300 max-w-2xl mx-auto">
-                        Kom langs in onze fysieke winkel voor een persoonlijke shopping ervaring. 
-                        Ontdek onze volledige collectie en krijg stylingadvies van onze experts.
-                    </p>
+            
+            <div class="grid md:grid-cols-2 gap-16 md:gap-32">
+                <!-- Contact Form -->
+                <div class="contact-card bg-gray-50 p-8 rounded-xl">
+                    <h3 class="font-serif text-2xl font-medium mb-6 text-gray-900">Stuur ons een bericht</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <input type="text" id="voornaam" name="voornaam" placeholder="Voornaam"
+                                    class="form-input w-full focus:outline-none">
+                            </div>
+                            <div>
+                                <input type="text" id="achternaam" name="achternaam" required placeholder="Achternaam *"
+                                    class="form-input w-full focus:outline-none">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <input type="tel" id="telefoon" name="telefoon" required placeholder="Telefoonnummer *"
+                                    pattern="^(\+31|0)[0-9]{9}$"
+                                    class="form-input w-full focus:outline-none">
+                            </div>
+                            <div>
+                                <input type="email" id="email" name="email" required placeholder="E-mailadres *"
+                                    class="form-input w-full focus:outline-none">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <input type="text" id="adres" name="adres" placeholder="Adres"
+                                class="form-input w-full focus:outline-none">
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <input type="text" id="postcode" name="postcode" placeholder="Postcode"
+                                    pattern="^[1-9][0-9]{3}[A-Za-z]{2}$"
+                                    class="form-input w-full focus:outline-none">
+                            </div>
+                            <div>
+                                <input type="text" id="woonplaats" name="woonplaats" placeholder="Woonplaats"
+                                    class="form-input w-full focus:outline-none">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <select id="geslacht" name="geslacht"
+                                class="form-input w-full focus:outline-none">
+                                <option value="">Geslacht</option>
+                                <option value="man">Man</option>
+                                <option value="vrouw">Vrouw</option>
+                                <option value="anders">Anders</option>
+                                <option value="zeg-ik-liever-niet">Zeg ik liever niet</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <input type="number" id="leeftijd" name="leeftijd" min="13" max="120" placeholder="Leeftijd"
+                                class="form-input w-full focus:outline-none">
+                        </div>
+                        
+                        <div>
+                            <label class="text-minimal block mb-4">Interesse in:</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <label class="flex items-center text-minimal cursor-pointer">
+                                    <input type="checkbox" name="interesse[]" value="dameskleding" class="mr-3">
+                                    Dameskleding
+                                </label>
+                                <label class="flex items-center text-minimal cursor-pointer">
+                                    <input type="checkbox" name="interesse[]" value="herenkleding" class="mr-3">
+                                    Herenkleding
+                                </label>
+                                <label class="flex items-center text-minimal cursor-pointer">
+                                    <input type="checkbox" name="interesse[]" value="accessoires" class="mr-3">
+                                    Accessoires
+                                </label>
+                                <label class="flex items-center text-minimal cursor-pointer">
+                                    <input type="checkbox" name="interesse[]" value="schoenen" class="mr-3">
+                                    Schoenen
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <textarea id="vraag" name="vraag" required rows="5" placeholder="Uw bericht *"
+                                class="form-input w-full focus:outline-none resize-none"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="flex items-center text-minimal cursor-pointer">
+                                <input type="checkbox" id="nieuwsbrief" name="nieuwsbrief" value="ja" class="mr-3">
+                                Ik wil graag de nieuwsbrief ontvangen
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn-minimal w-full hover-accent">
+                            Verstuur Bericht
+                        </button>
+                    </form>
                 </div>
                 
-                <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                    <!-- Store Info -->
-                    <div class="card-luxury p-6 rounded-xl">
-                        <h4 class="text-xl font-bold text-white mb-4 flex items-center">
-                            <i class="fas fa-info-circle mr-2"></i>Winkel Informatie
-                        </h4>
-                        <div class="space-y-3 text-gray-300">
-                            <p class="flex items-center">
-                                <i class="fas fa-map-marker-alt text-white mr-3 w-5"></i>
-                                Kruiskade 88, Rotterdam
-                            </p>
-                            <p class="flex items-center">
-                                <i class="fas fa-clock text-white mr-3 w-5"></i>
-                                Ma-Za: 10:00 - 18:00, Zo: 12:00 - 17:00
-                            </p>
-                            <p class="flex items-center">
-                                <i class="fas fa-phone text-white mr-3 w-5"></i>
-                                +31 10 123 4567
-                            </p>
-                            <p class="flex items-center">
-                                <i class="fas fa-envelope text-white mr-3 w-5"></i>
-                                info@tbtrendvibe.nl
-                            </p>
+                <!-- Store Information -->
+                <div class="contact-card space-y-8 bg-white p-8 rounded-xl border border-gray-100">\
+                    <div>
+                        <h3 class="font-serif text-xl font-medium mb-4">Winkel Informatie</h3>
+                        <div class="space-y-3 text-minimal">
+                            <p><strong>Kruiskade 88, Rotterdam</strong></p>
+                            <p>Ma-Za: 10:00 - 18:00</p>
+                            <p>Zondag: 12:00 - 17:00</p>
+                            <p>+31 10 123 4567</p>
+                            <p>info@bugboetiek.nl</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-serif text-xl font-medium mb-4">Opening Event</h3>
+                        <div class="text-minimal">
+                            <p><strong>8 augustus 2024</strong></p>
+                            <p>17:00 - 23:00</p>
+                            <p>Gratis entree & cocktails</p>
                         </div>
                     </div>
                     
                     <!-- Google Maps -->
-                    <div class="card-luxury p-6 rounded-xl">
-                        <h4 class="text-xl font-bold text-white mb-4 flex items-center">
-                            <i class="fas fa-map text-white mr-2"></i>Routebeschrijving
-                        </h4>
-                        <div class="rounded-lg overflow-hidden border border-gray-600">
+                    <div>
+                        <h3 class="font-serif text-xl font-medium mb-4">Routebeschrijving</h3>
+                        <div class="border border-gray-200">
                             <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2460.6518469988305!2d4.472674961556702!3d51.92206278518978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c434a71fbb0a69%3A0xe27294f12cfa5e9!2sKruiskade%2088%2C%203012%20EH%20Rotterdam!5e0!3m2!1snl!2snl!4v1751544732523!5m2!1snl!2snl" 
                                 width="100%" 
@@ -685,31 +942,177 @@
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
+                        <div class="mt-3 text-minimal">
+                            <p><strong>OV:</strong> Tram 7, 20 tot halte Kruiskade</p>
+                            <p><strong>Auto:</strong> Parkeergarage Lijnbaan (5 min lopen)</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Footer Bottom -->
-            <div class="border-t border-gray-600 pt-8">
-                <div class="text-center">
-                    <div class="flex justify-center items-center mb-4">
-                        <i class="fas fa-gem text-white text-2xl mr-3"></i>
-                        <h3 class="text-xl font-bold">TB TrendVibe Boutique</h3>
-                    </div>
-                    <p class="mb-2">© 2025 TB TrendVibe Boutique. Alle rechten voorbehouden.</p>
-                    <p class="flex items-center justify-center">
-                        <i class="fas fa-map-marker-alt text-gray-300 mr-2"></i>
-                        Kruiskade 88, Rotterdam | 
-                        <a href="#contact" class="text-white hover:text-gray-300 ml-2 flex items-center">
-                            <i class="fas fa-envelope mr-1"></i>Contact
-                        </a>
-                    </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="accent-yellow border-t border-accent-yellow py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center">
+                <div class="font-serif text-2xl font-medium mb-6 text-gray-900">BugBoetiek</div>
+                <p class="text-minimal mb-6">© 2025 BugBoetiek. Alle rechten voorbehouden.</p>
+                <div class="flex justify-center space-x-8 text-minimal">
+                    <span>Kruiskade 88, Rotterdam</span>
+                    <span class="text-accent-yellow">•</span>
+                    <a href="#contact" class="hover:text-amber-600 transition-colors">Contact</a>
+                    <span class="text-accent-yellow">•</span>
+                    <span>100% Duurzame Mode</span>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- External JavaScript file -->
-    <script src="js/script.js"></script>
+    <!-- JavaScript -->
+    <script>
+        // Navigation scroll effect
+        const nav = document.querySelector('.nav-enhanced');
+        let lastScrollY = window.scrollY;
+        
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            
+            // Show navbar after scrolling down from hero section
+            if (currentScrollY > window.innerHeight * 0.3) {
+                nav.classList.add('visible');
+            } else {
+                nav.classList.remove('visible');
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+        
+        // Hero video transition
+        const heroImage = document.getElementById('heroImage');
+        const heroVideo = document.getElementById('heroVideo');
+        
+        // Wait for video to load, then fade it in after 3 seconds
+        heroVideo.addEventListener('loadeddata', () => {
+            setTimeout(() => {
+                heroVideo.classList.add('show');
+            }, 3000);
+        });
+        
+        // Fallback if video doesn't load
+        heroVideo.addEventListener('error', () => {
+            console.log('Video failed to load, keeping image');
+        });
+        
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (mobileMenu.classList.contains('active') && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        // Close mobile menu when clicking on links
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = nav.classList.contains('visible') ? nav.offsetHeight : 0;
+                    const targetPosition = target.offsetTop - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Improved form validation
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple validation
+            const required = ['achternaam', 'telefoon', 'email', 'vraag'];
+            let isValid = true;
+            let firstInvalidField = null;
+            
+            required.forEach(field => {
+                const input = document.getElementById(field);
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#ef4444';
+                    if (!firstInvalidField) {
+                        firstInvalidField = input;
+                    }
+                } else {
+                    input.style.borderColor = '#e5e7eb';
+                }
+            });
+            
+            // Email validation
+            const emailInput = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailInput.value && !emailRegex.test(emailInput.value)) {
+                isValid = false;
+                emailInput.style.borderColor = '#ef4444';
+                if (!firstInvalidField) {
+                    firstInvalidField = emailInput;
+                }
+            }
+            
+            // Phone validation
+            const phoneInput = document.getElementById('telefoon');
+            const phoneRegex = /^(\+31|0)[0-9]{9}$/;
+            if (phoneInput.value && !phoneRegex.test(phoneInput.value)) {
+                isValid = false;
+                phoneInput.style.borderColor = '#ef4444';
+                if (!firstInvalidField) {
+                    firstInvalidField = phoneInput;
+                }
+            }
+            
+            if (isValid) {
+                alert('Bedankt voor uw bericht! We nemen zo snel mogelijk contact met u op.');
+                this.reset();
+            } else {
+                alert('Controleer de verplichte velden en zorg dat email en telefoonnummer correct zijn ingevuld.');
+                if (firstInvalidField) {
+                    firstInvalidField.focus();
+                }
+            }
+        });
+        
+        // Reset border color on input focus
+        const formInputs = document.querySelectorAll('#contact-form input, #contact-form textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#f59e0b';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.borderColor = '#e5e7eb';
+            });
+        });
+    </script>
 </body>
 </html>
