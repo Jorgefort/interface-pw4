@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles */
 body {
     font-family: 'JetBrains Mono', monospace;
     background-color: #000000;

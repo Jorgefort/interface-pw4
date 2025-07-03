@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BugBoetiek - Grand Opening</title>
+    <title>BBUGTIEK - Grand Opening</title>
     <link rel="stylesheet" href="dist/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap">
@@ -21,6 +21,7 @@
             padding: 0;
             /* Hide scrollbar but keep functionality */
             overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
         }
         
         /* Webkit scrollbar styling - hide scrollbar but keep scrolling */
@@ -122,7 +123,7 @@
         .collection-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 0;
+            gap: 0.5rem;
         }
         
         .product-card {
@@ -428,6 +429,11 @@
             color: white;
             opacity: 0.8;
             animation: bounce 2s infinite;
+            transition: opacity 0.5s ease;
+        }
+        
+        .scroll-indicator.hidden {
+            opacity: 0;
         }
         
         @keyframes bounce {
@@ -444,16 +450,53 @@
         
         /* Navigation scroll effects */
         .nav-enhanced {
-            background: rgba(254, 254, 254, 0.98);
+            background: rgba(254, 254, 254, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(254, 243, 199, 0.3);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            border-bottom: 1px solid rgba(254, 243, 199, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             transform: translateY(-100%);
-            transition: transform 0.3s ease-in-out;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         
         .nav-enhanced.visible {
             transform: translateY(0);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .nav-enhanced .nav-link {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-enhanced .nav-link:hover {
+            background-color: rgba(245, 158, 11, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        .nav-enhanced .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #f59e0b, #fbbf24);
+            transition: width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .nav-enhanced .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-logo {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-logo:hover {
+            transform: scale(1.05);
+            color: #f59e0b;
         }
         
         /* Hero buttons styling */
@@ -518,25 +561,22 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
-    <!-- Navigation -->
     <nav class="nav-enhanced fixed w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="font-serif text-2xl font-medium tracking-wide text-gray-900">
-                    BugBoetiek
+            <div class="flex justify-between items-center h-24">
+                <div class="nav-logo font-serif text-2xl font-medium tracking-wide text-gray-900 cursor-pointer" style="margin-left: 2rem;">
+                    BBUGTIEK
                 </div>
                 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-12">
-                    <a href="#home" class="text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide">Home</a>
-                    <a href="#opening" class="text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide">Opening</a>
-                    <a href="#collectie" class="text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide">Collectie</a>
-                    <a href="#duurzaamheid" class="text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide">Duurzaamheid</a>
-                    <a href="#contact" class="text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide">Contact</a>
+                <div class="hidden md:flex items-center" style="gap: 1.5rem; margin-right: 2rem;">
+                    <a href="#home" class="nav-link text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide" style="padding: 8px 16px; margin: 0 4px; border-radius: 6px;">Home</a>
+                    <a href="#opening" class="nav-link text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide" style="padding: 8px 16px; margin: 0 4px; border-radius: 6px;">Opening</a>
+                    <a href="#collectie" class="nav-link text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide" style="padding: 8px 16px; margin: 0 4px; border-radius: 6px;">Collectie</a>
+                    <a href="products.php" class="nav-link text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide" style="padding: 8px 16px; margin: 0 4px; border-radius: 6px;">Shop</a>
+                    <a href="#duurzaamheid" class="nav-link text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide" style="padding: 8px 16px; margin: 0 4px; border-radius: 6px;">Duurzaamheid</a>
+                    <a href="#contact" class="nav-link text-sm font-light text-gray-700 hover:text-gray-900 transition-colors tracking-wide" style="padding: 8px 16px; margin: 0 4px; border-radius: 6px;">Contact</a>
                 </div>
                 
-                <!-- Mobile Menu Button -->
                 <div class="md:hidden">
                     <div class="hamburger" id="hamburger">
                         <span></span>
@@ -547,52 +587,45 @@
             </div>
         </div>
         
-        <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobile-menu">
             <div class="flex flex-col text-center">
                 <a href="#home">Home</a>
                 <a href="#opening">Opening</a>
                 <a href="#collectie">Collectie</a>
+                <a href="products.php">Shop</a>
                 <a href="#duurzaamheid">Duurzaamheid</a>
                 <a href="#contact">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- Epic Hero Section -->
     <section id="home" class="hero-immersive">
-        <!-- Background Media -->
         <div class="hero-background">
-            <!-- Initial Image -->
-            <img src="assets/image copy 8.png" alt="BugBoetiek Fashion" class="hero-image" id="heroImage">
+            <img src="assets/image copy 8.png" alt="BBUGTIEK Fashion" class="hero-image" id="heroImage">
             
-            <!-- Video (will fade in after delay) -->
             <video class="hero-video" id="heroVideo" autoplay muted loop playsinline>
                 <source src="assets/CINEMATIC REAL ESTATE VIDEO _ MODERN LUXURY _ SONY FX3 & DJI MAVIC 3 PRO.mp4" type="video/mp4">
-                <!-- Fallback to external video if local file doesn't load -->
                 <source src="assets/CINEMATIC REAL ESTATE VIDEO _ MODERN LUXURY _ SONY FX3 & DJI MAVIC 3 PRO.mp4" type="video/mp4">
             </video>
         </div>
         
-        <!-- Overlay -->
         <div class="hero-overlay-gradient"></div>
         
-        <!-- Hero Content -->
         <div class="hero-content-center">
             <h1 class="hero-title-large font-serif">
-                BugBoetiek
+                BBUGTIEK
             </h1>
             <p class="hero-subtitle">
                 Minimalistisch • Modern • Duurzaam
             </p>
             <div class="hero-btn-group">
                 <a href="#opening" class="hero-btn">Ontdek Opening</a>
+                <a href="products.php" class="hero-btn secondary">Shop Nu</a>
                 <a href="#collectie" class="hero-btn secondary">Bekijk Collectie</a>
             </div>
         </div>
         
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" id="scrollIndicator">
             <div class="flex flex-col items-center">
                 <span class="text-sm mb-2 font-light">Scroll om te verkennen</span>
                 <i class="fas fa-chevron-down text-xl"></i>
@@ -600,13 +633,12 @@
         </div>
     </section>
 
-    <!-- Opening Information -->
     <section id="opening" class="section-padding accent-yellow">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="font-serif text-4xl md:text-5xl font-light mb-6">Grand Opening</h2>
                 <p class="text-minimal max-w-2xl mx-auto mb-12">
-                    Vier met ons de opening van BugBoetiek op 8 augustus 2024. 
+                    Vier met ons de opening van BBUGTIEK op 8 augustus 2024. 
                     Een avond vol mode, muziek en community.
                 </p>
             </div>
@@ -660,7 +692,7 @@
         </div>
     </section>
 
-    <!-- Fashion Collection -->
+    
     <section id="collectie" class="section-padding bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
@@ -671,9 +703,9 @@
                 </p>
             </div>
             
-            <!-- Collection Grid -->
+            
             <div class="collection-grid">
-                <!-- Product 1 -->
+                
                 <div class="product-card group">
                     <img src="assets/image copy.png" alt="Blazers & Jackets" class="w-full h-full object-cover">
                     <div class="product-overlay">
@@ -682,7 +714,7 @@
                     </div>
                 </div>
                 
-                <!-- Product 2 -->
+                
                 <div class="product-card group">
                     <img src="assets/image copy 3.png" alt="Dresses & Skirts" class="w-full h-full object-cover">
                     <div class="product-overlay">
@@ -691,7 +723,7 @@
                     </div>
                 </div>
                 
-                <!-- Product 3 -->
+                
                 <div class="product-card group">
                     <img src="assets/image copy 4.png" alt="Footwear" class="w-full h-full object-cover">
                     <div class="product-overlay">
@@ -700,7 +732,7 @@
                     </div>
                 </div>
                 
-                <!-- Product 4 -->
+                
                 <div class="product-card group">
                     <img src="assets/image copy 5.png" alt="Denim & Pants" class="w-full h-full object-cover">
                     <div class="product-overlay">
@@ -709,7 +741,7 @@
                     </div>
                 </div>
                 
-                <!-- Product 5 -->
+                
                 <div class="product-card group">
                     <img src="assets/image copy 6.png" alt="Accessories" class="w-full h-full object-cover">
                     <div class="product-overlay">
@@ -718,7 +750,7 @@
                     </div>
                 </div>
                 
-                <!-- Product 6 -->
+                
                 <div class="product-card group">
                     <img src="assets/image copy 8.png" alt="Watches & Jewelry" class="w-full h-full object-cover">
                     <div class="product-overlay">
@@ -730,17 +762,17 @@
         </div>
     </section>
 
-    <!-- Sustainability & Community Section -->
+    
     <section id="duurzaamheid" class="section-padding bg-gray-50">
         <div class="max-w-6xl mx-auto px-4">
             <div class="grid md:grid-cols-2 gap-16 items-center">
-                <!-- Text Content -->
+                
                 <div>
                     <h2 class="font-serif text-4xl md:text-5xl font-light mb-8">
                         Duurzaamheid & Community
                     </h2>
                     <p class="text-minimal mb-8">
-                        BugBoetiek staat voor meer dan alleen mode. We geloven in een toekomst 
+                        BBUGTIEK staat voor meer dan alleen mode. We geloven in een toekomst 
                         waar fashion en verantwoordelijkheid hand in hand gaan.
                     </p>
                     
@@ -786,7 +818,7 @@
                     </div>
                 </div>
                 
-                <!-- Image -->
+                
                 <div class="minimal-card border border-accent-yellow">
                     <img src="assets/image copy 13.png" alt="Sustainability" class="w-full h-96 object-cover">
                 </div>
@@ -794,7 +826,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    
     <section id="contact" class="section-padding bg-white">
         <div class="max-w-4xl mx-auto px-4">
             <div class="text-center mb-16">
@@ -806,7 +838,7 @@
             </div>
             
             <div class="grid md:grid-cols-2 gap-16 md:gap-32">
-                <!-- Contact Form -->
+                
                 <div class="contact-card bg-gray-50 p-8 rounded-xl">
                     <h3 class="font-serif text-2xl font-medium mb-6 text-gray-900">Stuur ons een bericht</h3>
                     <form id="contact-form" class="space-y-6">
@@ -906,7 +938,7 @@
                     </form>
                 </div>
                 
-                <!-- Store Information -->
+                
                 <div class="contact-card space-y-8 bg-white p-8 rounded-xl border border-gray-100">\
                     <div>
                         <h3 class="font-serif text-xl font-medium mb-4">Winkel Informatie</h3>
@@ -915,7 +947,7 @@
                             <p>Ma-Za: 10:00 - 18:00</p>
                             <p>Zondag: 12:00 - 17:00</p>
                             <p>+31 10 123 4567</p>
-                            <p>info@bugboetiek.nl</p>
+                            <p>info@bbugtiek.nl</p>
                         </div>
                     </div>
                     
@@ -928,7 +960,7 @@
                         </div>
                     </div>
                     
-                    <!-- Google Maps -->
+                    
                     <div>
                         <h3 class="font-serif text-xl font-medium mb-4">Routebeschrijving</h3>
                         <div class="border border-gray-200">
@@ -952,12 +984,12 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    
     <footer class="accent-yellow border-t border-accent-yellow py-12">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center">
-                <div class="font-serif text-2xl font-medium mb-6 text-gray-900">BugBoetiek</div>
-                <p class="text-minimal mb-6">© 2025 BugBoetiek. Alle rechten voorbehouden.</p>
+                <div class="font-serif text-2xl font-medium mb-6 text-gray-900">BBUGTIEK</div>
+                <p class="text-minimal mb-6">© 2025 BBUGTIEK. Alle rechten voorbehouden.</p>
                 <div class="flex justify-center space-x-8 text-minimal">
                     <span>Kruiskade 88, Rotterdam</span>
                     <span class="text-accent-yellow">•</span>
@@ -969,7 +1001,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    
     <script>
         // Navigation scroll effect
         const nav = document.querySelector('.nav-enhanced');
@@ -992,11 +1024,9 @@
         const heroImage = document.getElementById('heroImage');
         const heroVideo = document.getElementById('heroVideo');
         
-        // Wait for video to load, then fade it in after 3 seconds
+        // Play video immediately when loaded
         heroVideo.addEventListener('loadeddata', () => {
-            setTimeout(() => {
-                heroVideo.classList.add('show');
-            }, 3000);
+            heroVideo.classList.add('show');
         });
         
         // Fallback if video doesn't load
