@@ -1,0 +1,17 @@
+{
+  "name": "tb-trendvibe-boutique",
+  "version": "1.0.0",
+  "description": "TB TrendVibe Boutique Grand Opening Website",
+  "main": "index.html",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "dev": "live-server --port=3000"
+  },
+  "keywords": ["tailwindcss", "boutique", "fashion", "website"],
+  "author": "TB TrendVibe Boutique",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "live-server": "^1.2.2"
+  }
+}

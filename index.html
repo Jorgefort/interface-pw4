@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TB TrendVibe Boutique - Grand Opening</title>
+    <link rel="stylesheet" href="dist/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        
+        .luxury-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+        }
+        
+        .blue-accent {
+            color: #ffffff;
+        }
+        
+        .hover-blue:hover {
+            color: #ffffff;
+        }
+        
+        .card-luxury {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border: 1px solid #333;
+        }
+        
+        .form-luxury {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border: 1px solid #333;
+        }
+        
+        /* Enhanced Error Styling */
+        .error-border {
+            border: 2px solid #ef4444 !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .error-message::before {
+            content: "⚠️";
+            margin-right: 8px;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Mobile Menu Styles */
+        .mobile-menu-link {
+            transition: all 0.3s ease;
+            padding: 16px 24px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 500;
+            min-height: 60px;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        .mobile-menu-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+        
+        #mobile-menu {
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 9999 !important;
+        }
+        
+        #mobile-menu:not(.hidden) {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        #mobile-menu.show {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        #mobile-menu .flex.flex-col {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+        
+        /* Ensure mobile menu works on very small screens */
+        @media (max-width: 320px) {
+            #mobile-menu .flex.flex-col {
+                padding: 15px;
+            }
+            
+            #mobile-menu .flex.flex-col > * + * {
+                margin-top: 1.5rem;
+            }
+            
+            .mobile-menu-link {
+                font-size: 18px;
+                min-height: 50px;
+                padding: 12px 16px;
+            }
+        }
+        
+        /* Ensure mobile menu button is always visible on mobile */
+        @media (max-width: 767px) {
+            #mobile-menu-button {
+                display: block !important;
+                z-index: 60;
+                position: relative;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Navigation -->
+    <nav class="luxury-gradient text-white p-4 sticky top-0 z-40 shadow-xl">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="font-bold flex items-center">
+                <i class="fas fa-gem text-white mr-2"></i>
+                <span class="text-2xl blue-accent">TB</span>
+                <span class="text-base"> TrendVibe Boutique</span>
+            </h1>
+            
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-6 text-base">
+                <li><a href="#home" class="hover-blue flex items-center"><i class="fas fa-home mr-1"></i>Home</a></li>
+                <li><a href="#opening" class="hover-blue flex items-center"><i class="fas fa-calendar-star mr-1"></i>Opening</a></li>
+                <li><a href="#clothing" class="hover-blue flex items-center"><i class="fas fa-tshirt mr-1"></i>Kleding</a></li>
+                <li><a href="#sustainability" class="hover-blue flex items-center"><i class="fas fa-leaf mr-1"></i>Duurzaamheid</a></li>
+                <li><a href="#contact" class="hover-blue flex items-center"><i class="fas fa-envelope mr-1"></i>Contact</a></li>
+            </ul>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-95 hidden">
+            <div class="flex flex-col items-center justify-center h-screen space-y-8 text-xl px-4">
+                <a href="#home" class="mobile-menu-link text-white hover-blue flex items-center w-full max-w-xs justify-center py-4"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="#opening" class="mobile-menu-link text-white hover-blue flex items-center w-full max-w-xs justify-center py-4"><i class="fas fa-calendar-star mr-2"></i>Opening</a>
+                <a href="#clothing" class="mobile-menu-link text-white hover-blue flex items-center w-full max-w-xs justify-center py-4"><i class="fas fa-tshirt mr-2"></i>Kleding</a>
+                <a href="#sustainability" class="mobile-menu-link text-white hover-blue flex items-center w-full max-w-xs justify-center py-4"><i class="fas fa-leaf mr-2"></i>Duurzaamheid</a>
+                <a href="#contact" class="mobile-menu-link text-white hover-blue flex items-center w-full max-w-xs justify-center py-4"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Carousel -->
+    <section id="home" class="relative">
+        <div class="carousel relative">
+            <div class="carousel-inner flex transition-transform duration-500 ease-in-out">
+                <!-- Placeholder for images -->
+                <div class="carousel-item w-full flex-shrink-0">
+                    <img src="assets/image copy 8.png" alt="Hippe horloge" class="w-full h-[600px] object-cover">
+                </div>
+                <div class="carousel-item w-full flex-shrink-0">
+                    <img src="assets/image copy 9.png" alt="Trendy Jacket" class="w-full h-[600px] object-cover">
+                </div>
+                <div class="carousel-item w-full flex-shrink-0">
+                    <img src="assets/image copy 13.png" alt="Chique Blouse" class="w-full h-[600px] object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <h2 class="text-4xl font-bold text-white">Be Part of Our Community</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opening Information -->
+    <section id="opening" class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <i class="fas fa-calendar-star text-6xl text-white mb-4"></i>
+                <h2 class="text-4xl font-bold text-white mb-4">Feestelijke Opening</h2>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="card-luxury p-8 rounded-2xl shadow-2xl mb-8">
+                    <div class="text-center">
+                        <p class="text-xl mb-6 text-white">Kom naar de grand opening van <strong class="text-white">TB TrendVibe Boutique</strong> op <strong class="text-white">8 augustus 2024</strong> van <strong class="text-white">17:00 tot 23:00</strong>!</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-gray-900 bg-opacity-60 p-6 rounded-xl">
+                                <h3 class="text-xl font-bold mb-4 text-white flex items-center justify-center">
+                                    <i class="fas fa-music mr-2"></i>Entertainment
+                                </h3>
+                                <ul class="space-y-2 text-white">
+                                    <li class="flex items-center"><i class="fas fa-microphone text-gray-300 mr-2"></i>Live DJ en livemuziek</li>
+                                    <li class="flex items-center"><i class="fas fa-cocktail text-gray-300 mr-2"></i>Gratis cocktail voor elke bezoeker</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-900 bg-opacity-60 p-6 rounded-xl">
+                                <h3 class="text-xl font-bold mb-4 text-white flex items-center justify-center">
+                                    <i class="fas fa-gift mr-2"></i>Speciale Aanbiedingen
+                                </h3>
+                                <ul class="space-y-2 text-white">
+                                    <li class="flex items-center"><i class="fas fa-percentage text-gray-300 mr-2"></i>Exclusieve aanbiedingen op onze collectie</li>
+                                    <li class="flex items-center"><i class="fas fa-hat-cowboy text-gray-300 mr-2"></i>Gratis cap voor de eerste 100 bezoekers!</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900 bg-opacity-60 p-6 rounded-xl mb-6">
+                            <p class="font-bold text-xl text-white flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt mr-2"></i>Locatie: Kruiskade 88, Rotterdam
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accessories Carousel Section -->
+    <section id="accessories" class="py-8 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-6">
+                <i class="fas fa-gem text-3xl text-white mb-3"></i>
+                <h2 class="text-2xl font-bold text-white mb-3">Onze Collectie</h2>
+                <p class="text-gray-300 max-w-xl mx-auto">
+                    Ontdek onze exclusieve accessoire collectie.
+                </p>
+            </div>
+            
+            <div class="relative max-w-3xl mx-auto">
+                <div class="accessories-carousel relative overflow-hidden rounded-lg">
+                    <div class="accessories-carousel-inner flex transition-transform duration-500 ease-in-out">
+                        <!-- Accessory 1 -->
+                        <div class="accessories-carousel-item w-full flex-shrink-0">
+                            <div class="card-luxury rounded-lg overflow-hidden mx-3 h-64 flex flex-col">
+                                <div class="h-40 w-full overflow-hidden">
+                                    <img src="assets/image copy 6.png" alt="Luxe Handtas" class="w-full h-full object-cover object-center">
+                                </div>
+                                <div class="p-4 text-center h-24 flex flex-col justify-between flex-1">
+                                    <h3 class="text-lg font-semibold text-white mb-1 flex items-center justify-center">
+                                        <i class="fas fa-shopping-bag text-gray-300 mr-2 text-sm"></i>Luxe Handtas
+                                    </h3>
+                                    <p class="text-gray-300 text-sm">Elegante handtas</p>
+                                    <p class="text-white font-bold">€89,99</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Accessory 2 -->
+                        <div class="accessories-carousel-item w-full flex-shrink-0">
+                            <div class="card-luxury rounded-lg overflow-hidden mx-3 h-64 flex flex-col">
+                                <div class="h-40 w-full overflow-hidden">
+                                    <img src="assets/image copy 8.png" alt="Designer Horloge" class="w-full h-full object-cover object-center">
+                                </div>
+                                <div class="p-4 text-center h-24 flex flex-col justify-between flex-1">
+                                    <h3 class="text-lg font-semibold text-white mb-1 flex items-center justify-center">
+                                        <i class="fas fa-clock text-gray-300 mr-2 text-sm"></i>Designer Horloge
+                                    </h3>
+                                    <p class="text-gray-300 text-sm">Stijlvol horloge</p>
+                                    <p class="text-white font-bold">€149,99</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Accessory 3 -->
+                        <div class="accessories-carousel-item w-full flex-shrink-0">
+                            <div class="card-luxury rounded-lg overflow-hidden mx-3 h-64 flex flex-col">
+                                <div class="h-40 w-full overflow-hidden">
+                                    <img src="assets/image.png" alt="Statement Ketting" class="w-full h-full object-cover object-center">
+                                </div>
+                                <div class="p-4 text-center h-24 flex flex-col justify-between flex-1">
+                                    <h3 class="text-lg font-semibold text-white mb-1 flex items-center justify-center">
+                                        <i class="fas fa-gem text-gray-300 mr-2 text-sm"></i>Statement Ketting
+                                    </h3>
+                                    <p class="text-gray-300 text-sm">Opvallende ketting</p>
+                                    <p class="text-white font-bold">€59,99</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Accessory 4 -->
+                        <div class="accessories-carousel-item w-full flex-shrink-0">
+                            <div class="card-luxury rounded-lg overflow-hidden mx-3 h-64 flex flex-col">
+                                <div class="h-40 w-full overflow-hidden">
+                                    <img src="assets/image copy 14.png" alt="Trendy Zonnebril" class="w-full h-full object-cover object-center">
+                                </div>
+                                <div class="p-4 text-center h-24 flex flex-col justify-between flex-1">
+                                    <h3 class="text-lg font-semibold text-white mb-1 flex items-center justify-center">
+                                        <i class="fas fa-glasses text-gray-300 mr-2 text-sm"></i>Trendy Zonnebril
+                                    </h3>
+                                    <p class="text-gray-300 text-sm">Hippe zonnebril</p>
+                                    <p class="text-white font-bold">€79,99</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Accessory 5 -->
+                        <div class="accessories-carousel-item w-full flex-shrink-0">
+                            <div class="card-luxury rounded-lg overflow-hidden mx-3 h-64 flex flex-col">
+                                <div class="h-40 w-full overflow-hidden">
+                                    <img src="assets/image copy.png" alt="Leren Riem" class="w-full h-full object-cover object-center">
+                                </div>
+                                <div class="p-4 text-center h-24 flex flex-col justify-between flex-1">
+                                    <h3 class="text-lg font-semibold text-white mb-1 flex items-center justify-center">
+                                        <i class="fas fa-user-tie text-gray-300 mr-2 text-sm"></i>Leren Riem
+                                    </h3>
+                                    <p class="text-gray-300 text-sm">Premium leren riem</p>
+                                    <p class="text-white font-bold">€49,99</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel indicators -->
+                <div class="flex justify-center mt-4 space-x-2">
+                    <button class="accessories-indicator w-2 h-2 rounded-full bg-gray-600 hover:bg-white transition-colors" data-slide="0"></button>
+                    <button class="accessories-indicator w-2 h-2 rounded-full bg-gray-600 hover:bg-white transition-colors" data-slide="1"></button>
+                    <button class="accessories-indicator w-2 h-2 rounded-full bg-gray-600 hover:bg-white transition-colors" data-slide="2"></button>
+                    <button class="accessories-indicator w-2 h-2 rounded-full bg-gray-600 hover:bg-white transition-colors" data-slide="3"></button>
+                    <button class="accessories-indicator w-2 h-2 rounded-full bg-gray-600 hover:bg-white transition-colors" data-slide="4"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clothing Collection -->
+    <section id="clothing" class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <i class="fas fa-tshirt text-6xl text-white mb-4"></i>
+                <h2 class="text-4xl font-bold text-white mb-4">Onze Collectie</h2>
+                <div class="card-luxury p-6 rounded-xl max-w-3xl mx-auto">
+                    <p class="text-lg text-white">Ontdek onze trendy en duurzame kledingcollectie, perfect voor de moderne garderobe.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card-luxury rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img src="assets/image copy.png" alt="Blazers" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white flex items-center mb-2">
+                            <i class="fas fa-user-tie text-gray-300 mr-2"></i>Blazers
+                        </h3>
+                        <p class="text-gray-300">Stijlvolle en veelzijdige blazers voor elke gelegenheid.</p>
+                    </div>
+                </div>
+                <div class="card-luxury rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img src="assets/image copy 3.png" alt="Jurken" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white flex items-center mb-2">
+                            <i class="fas fa-female text-gray-300 mr-2"></i>Jurken
+                        </h3>
+                        <p class="text-gray-300">Elegante jurken, van casual tot chique.</p>
+                    </div>
+                </div>
+                <div class="card-luxury rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img src="assets/image copy 4.png" alt="Sneakers" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white flex items-center mb-2">
+                            <i class="fas fa-running text-gray-300 mr-2"></i>Sneakers
+                        </h3>
+                        <p class="text-gray-300">Comfortabele en hippe sneakers voor dagelijks gebruik.</p>
+                    </div>
+                </div>
+                <div class="card-luxury rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img src="assets/image copy 5.png" alt="Jeans" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white flex items-center mb-2">
+                            <i class="fas fa-user text-gray-300 mr-2"></i>Jeans
+                        </h3>
+                        <p class="text-gray-300">Moderne jeans met een perfecte pasvorm.</p>
+                    </div>
+                </div>
+                <div class="card-luxury rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img src="assets/image copy 6.png" alt="Accessoires" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white flex items-center mb-2">
+                            <i class="fas fa-shopping-bag text-gray-300 mr-2"></i>Accessoires
+                        </h3>
+                        <p class="text-gray-300">Tassen, sieraden en meer om je look af te maken.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability Section -->
+    <section id="sustainability" class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <i class="fas fa-leaf text-6xl text-white mb-4"></i>
+                <h2 class="text-4xl font-bold text-white mb-8">Duurzaamheid & Community</h2>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card-luxury p-8 rounded-xl">
+                        <div class="text-center">
+                            <i class="fas fa-recycle text-4xl text-white mb-4"></i>
+                            <h3 class="text-2xl font-bold text-white mb-4">Duurzame Mode</h3>
+                            <p class="text-gray-300 leading-relaxed">Bij <strong class="text-white">TB TrendVibe Boutique</strong> zijn we toegewijd aan duurzaamheid. Onze kleding is gemaakt van milieuvriendelijke materialen en we streven naar een circulaire mode-industrie.</p>
+                        </div>
+                    </div>
+                    <div class="card-luxury p-8 rounded-xl">
+                        <div class="text-center">
+                            <i class="fas fa-users text-4xl text-white mb-4"></i>
+                            <h3 class="text-2xl font-bold text-white mb-4">Community Platform</h3>
+                            <p class="text-gray-300 leading-relaxed">Word lid van onze community! We bieden een platform voor kledingverkoop en -ruil, zodat je jouw garderobe kunt vernieuwen op een duurzame manier.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-luxury p-8 rounded-xl mt-8 text-center">
+                    <i class="fas fa-share-alt text-3xl text-white mb-4"></i>
+                    <p class="text-lg text-white">Volg ons op social media om deel te nemen aan onze initiatieven en evenementen!</p>
+                    <div class="flex justify-center space-x-6 mt-6">
+                        <a href="#" class="text-white hover:text-gray-300 text-2xl transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white hover:text-gray-300 text-2xl transition-colors"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white hover:text-gray-300 text-2xl transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white hover:text-gray-300 text-2xl transition-colors"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <i class="fas fa-envelope text-6xl text-white mb-4"></i>
+                <h2 class="text-4xl font-bold text-white mb-4">Contacteer Ons</h2>
+            </div>
+            <form id="contact-form" class="max-w-lg mx-auto form-luxury p-8 rounded-2xl shadow-2xl">
+                <div class="mb-4">
+                    <label for="voornaam" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-user text-gray-300 mr-2"></i>Voornaam *
+                    </label>
+                    <input type="text" id="voornaam" name="voornaam" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
+                    <p id="voornaam-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
+                </div>
+                <div class="mb-4">
+                    <label for="achternaam" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-user text-gray-300 mr-2"></i>Achternaam *
+                    </label>
+                    <input type="text" id="achternaam" name="achternaam" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
+                    <p id="achternaam-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
+                </div>
+                <div class="mb-4">
+                    <label for="geslacht" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-venus-mars text-gray-300 mr-2"></i>Geslacht *
+                    </label>
+                    <select id="geslacht" name="geslacht" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
+                        <option value="">Selecteer geslacht</option>
+                        <option value="man">Man</option>
+                        <option value="vrouw">Vrouw</option>
+                        <option value="anders">Anders</option>
+                        <option value="zeg-ik-liever-niet">Zeg ik liever niet</option>
+                    </select>
+                    <p id="geslacht-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
+                </div>
+                <div class="mb-4">
+                    <label for="geboortedatum" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-calendar text-gray-300 mr-2"></i>Geboortedatum *
+                    </label>
+                    <input type="date" id="geboortedatum" name="geboortedatum" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
+                    <p id="geboortedatum-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
+                </div>
+                <div class="mb-4">
+                    <label for="telefoon" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-phone text-gray-300 mr-2"></i>Telefoonnummer *
+                    </label>
+                    <input type="tel" id="telefoon" name="telefoon" required pattern="(\+31|0)[0-9]{9}" placeholder="+31612345678" class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
+                    <p id="telefoon-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-at text-gray-300 mr-2"></i>E-mailadres *
+                    </label>
+                    <input type="email" id="email" name="email" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
+                    <p id="email-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
+                </div>
+                <div class="mb-4">
+                    <label for="adres" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-home text-gray-300 mr-2"></i>Adres *
+                    </label>
+                    <input type="text" id="adres" name="adres" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white" placeholder="Straatnaam en huisnummer">
+                    <p id="adres-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
+                </div>
+                <div class="mb-4">
+                    <label for="postcode" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-mail-bulk text-gray-300 mr-2"></i>Postcode *
+                    </label>
+                    <input type="text" id="postcode" name="postcode" required pattern="[0-9]{4}[A-Za-z]{2}" placeholder="1234AB" class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
+                    <p id="postcode-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
+                </div>
+                <div class="mb-4">
+                    <label for="woonplaats" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-city text-gray-300 mr-2"></i>Woonplaats *
+                    </label>
+                    <input type="text" id="woonplaats" name="woonplaats" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
+                    <p id="woonplaats-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
+                </div>
+                <div class="mb-4">
+                    <label for="kledingmaat" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-ruler text-gray-300 mr-2"></i>Voorkeurs Kledingmaat
+                    </label>
+                    <select id="kledingmaat" name="kledingmaat" class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
+                        <option value="">Selecteer maat</option>
+                        <option value="xs">XS</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                        <option value="xl">XL</option>
+                        <option value="xxl">XXL</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="budget" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-euro-sign text-gray-300 mr-2"></i>Budget per aankoop
+                    </label>
+                    <input type="range" id="budget" name="budget" min="25" max="500" value="100" class="mt-1 block w-full">
+                    <div class="flex justify-between text-sm text-gray-300 mt-1">
+                        <span>€25</span>
+                        <span id="budget-value">€100</span>
+                        <span>€500</span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-heart text-gray-300 mr-2"></i>Interesse in
+                    </label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" name="interesse[]" value="herenkleding" class="mr-2 text-black focus:ring-black">
+                            <span class="text-white">Herenkleding</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" name="interesse[]" value="dameskleding" class="mr-2 text-black focus:ring-black">
+                            <span class="text-white">Dameskleding</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" name="interesse[]" value="accessoires" class="mr-2 text-black focus:ring-black">
+                            <span class="text-white">Accessoires</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" name="interesse[]" value="schoenen" class="mr-2 text-black focus:ring-black">
+                            <span class="text-white">Schoenen</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="onderwerp" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-tag text-gray-300 mr-2"></i>Onderwerp *
+                    </label>
+                    <select id="onderwerp" name="onderwerp" required class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white">
+                        <option value="">Selecteer onderwerp</option>
+                        <option value="algemeen">Algemene vraag</option>
+                        <option value="opening">Vraag over de opening</option>
+                        <option value="kleding">Vraag over kleding</option>
+                        <option value="duurzaamheid">Vraag over duurzaamheid</option>
+                        <option value="bestelling">Bestelling plaatsen</option>
+                        <option value="retour">Retour/Ruil</option>
+                    </select>
+                    <p id="onderwerp-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
+                </div>
+                <div class="mb-4">
+                    <label class="flex items-center">
+                        <input type="checkbox" id="nieuwsbrief" name="nieuwsbrief" value="ja" class="mr-2 text-black focus:ring-black">
+                        <span class="text-white">Ik wil graag de nieuwsbrief ontvangen</span>
+                    </label>
+                </div>
+                <div class="mb-6">
+                    <label for="vraag" class="text-sm font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-comment text-gray-300 mr-2"></i>Uw bericht *
+                    </label>
+                    <textarea id="vraag" name="vraag" required rows="5" class="mt-1 block w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-black focus:border-black text-white" placeholder="Vertel ons wat we voor u kunnen betekenen..."></textarea>
+                    <p id="vraag-error" class="text-red-400 text-sm hidden mt-1">This is necessary to continue</p>
+                </div>
+                <button type="submit" class="w-full bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-md font-semibold transition-all duration-300 flex items-center justify-center">
+                    <i class="fas fa-paper-plane mr-2"></i>Verzenden
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="luxury-gradient text-white py-12 border-t border-gray-600">
+        <div class="container mx-auto px-4">
+            <!-- Visit Our Shop Section -->
+            <div class="mb-12">
+                <div class="text-center mb-8">
+                    <i class="fas fa-store text-4xl text-white mb-4"></i>
+                    <h3 class="text-3xl font-bold text-white mb-4">Bezoek Onze Winkel</h3>
+                    <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+                        Kom langs in onze fysieke winkel voor een persoonlijke shopping ervaring. 
+                        Ontdek onze volledige collectie en krijg stylingadvies van onze experts.
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    <!-- Store Info -->
+                    <div class="card-luxury p-6 rounded-xl">
+                        <h4 class="text-xl font-bold text-white mb-4 flex items-center">
+                            <i class="fas fa-info-circle mr-2"></i>Winkel Informatie
+                        </h4>
+                        <div class="space-y-3 text-gray-300">
+                            <p class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-white mr-3 w-5"></i>
+                                Kruiskade 88, Rotterdam
+                            </p>
+                            <p class="flex items-center">
+                                <i class="fas fa-clock text-white mr-3 w-5"></i>
+                                Ma-Za: 10:00 - 18:00, Zo: 12:00 - 17:00
+                            </p>
+                            <p class="flex items-center">
+                                <i class="fas fa-phone text-white mr-3 w-5"></i>
+                                +31 10 123 4567
+                            </p>
+                            <p class="flex items-center">
+                                <i class="fas fa-envelope text-white mr-3 w-5"></i>
+                                info@tbtrendvibe.nl
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Google Maps -->
+                    <div class="card-luxury p-6 rounded-xl">
+                        <h4 class="text-xl font-bold text-white mb-4 flex items-center">
+                            <i class="fas fa-map text-white mr-2"></i>Routebeschrijving
+                        </h4>
+                        <div class="rounded-lg overflow-hidden border border-gray-600">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2460.6518469988305!2d4.472674961556702!3d51.92206278518978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c434a71fbb0a69%3A0xe27294f12cfa5e9!2sKruiskade%2088%2C%203012%20EH%20Rotterdam!5e0!3m2!1snl!2snl!4v1751544732523!5m2!1snl!2snl" 
+                                width="100%" 
+                                height="250" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="border-t border-gray-600 pt-8">
+                <div class="text-center">
+                    <div class="flex justify-center items-center mb-4">
+                        <i class="fas fa-gem text-white text-2xl mr-3"></i>
+                        <h3 class="text-xl font-bold">TB TrendVibe Boutique</h3>
+                    </div>
+                    <p class="mb-2">© 2025 TB TrendVibe Boutique. Alle rechten voorbehouden.</p>
+                    <p class="flex items-center justify-center">
+                        <i class="fas fa-map-marker-alt text-gray-300 mr-2"></i>
+                        Kruiskade 88, Rotterdam | 
+                        <a href="#contact" class="text-white hover:text-gray-300 ml-2 flex items-center">
+                            <i class="fas fa-envelope mr-1"></i>Contact
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External JavaScript file -->
+    <script src="js/script.js"></script>
+</body>
+</html>
