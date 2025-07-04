@@ -1,51 +1,34 @@
-# BBUGTIEK Project - Transfer to PHPStorm
+# Sustainable Clothing Shop - Database Setup
 
-## Instructions voor PHPStorm
+## Database Requirements Met ✅
 
-### 1. Database Setup
-1. In PHPStorm, create a new SQLite database called `Productvoeg.db` in the `database/` folder
-2. Run the SQL from `database-schema.sql` to create the table structure
-3. Optionally add the sample data from the same file
+### Table Structure (producten)
+- **id**: INTEGER, NOT NULL, AUTO INCREMENT ✅
+- **naam**: TEXT, NOT NULL ✅  
+- **omschrijving**: TEXT (nullable) ✅
+- **maat**: TEXT with CHECK constraint (XS, S, M, L, XL) ✅
+- **afbeelding**: TEXT (nullable) ✅
+- **prijs**: INTEGER (stored in cents) ✅
 
-### 2. Project Structure
-```
-project/
-├── index.html (main landing page)
-├── products.php (shows all products)
-├── add-product.php (form to add new products)
-├── product-detail.php (shows single product)
-├── delete-product.php (delete products)
-├── config/database.php (database connection)
-├── database/Productvoeg.db (create this manually)
-├── assets/ (images and media)
-└── uploads/ (for uploaded product images)
-```
+### Database Features
+- ✅ SQLite database (`database/producten.db`)
+- ✅ Proper constraints and validation
+- ✅ Sample data included
+- ✅ Price stored in cents (e.g., 7995 = $79.95)
+- ✅ Size validation (XS, S, M, L, XL only)
+- ✅ Image file name storage
 
-### 3. Requirements
-- PHP 7.4+
-- SQLite support
-- Web server (Apache/Nginx or PHPStorm built-in)
+## Quick Start
 
-### 4. Database Schema
-According to assignment requirements:
-- Table name: `producten`
-- Fields: id (INTEGER, PRIMARY KEY, AUTOINCREMENT), naam (TEXT, NOT NULL), omschrijving (TEXT), maat (TEXT, XS/S/M/L/XL), afbeelding (TEXT), prijs (INTEGER in cents)
+1. **Start PHP server:**
+   ```bash
+   php -S localhost:8000
+   ```
 
-### 5. Features Implemented
-- ✅ Product listing page
-- ✅ Product detail page
-- ✅ Add product form with validation
-- ✅ Delete product functionality
-- ✅ Price formatting (stored in cents, displayed in euros)
-- ✅ Size validation (XS, S, M, L, XL)
-- ✅ Server-side validation
-- ✅ Beautiful responsive design
+2. **Access the application:**
+   - Home: http://localhost:8000/index.php
+   - Products: http://localhost:8000/products.php
+   - Add Product: http://localhost:8000/add-product.php
+   - Contact: http://localhost:8000/contact.php
 
-### 6. Navigation
-- `index.html` - Main landing page with links to `products.php`
-- `products.php` - Shows all products from database
-- `add-product.php` - Form to add new products
-- `product-detail.php?id=X` - Shows details of product with ID X
-- `delete-product.php?id=X` - Delete product with ID X
-
-The code has been simplified and is ready for transfer to PHPStorm. All database references now point to `Productvoeg.db` which you'll create manually.
+The application is now fully functional and ready for use! 🎉
