@@ -1,20 +1,16 @@
 <?php
 require_once 'config/database.php';
 
-$database = new Database();
-$pdo = $database->getConnection();
+// Connect to database
+$pdo = connectDatabase();
 
+// Get all products from database
 try {
     $stmt = $pdo->query("SELECT * FROM producten ORDER BY id DESC");
     $products = $stmt->fetchAll();
 } catch (PDOException $e) {
     $products = [];
-    $error_message = 'Error fetching products: ' . $e->getMessage();
-}
-
-function formatPrice($priceInCents) {
-    if ($priceInCents === null) return 'Prijs op aanvraag';
-    return '€ ' . number_format($priceInCents / 100, 2, ',', '.');
+    $error_message = 'Error loading products: ' . $e->getMessage();
 }
 ?>
 

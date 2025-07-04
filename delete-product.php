@@ -2,8 +2,8 @@
 require_once 'config/database.php';
 
 $message = '';
-$message_type = 'info';
 
+// Check if product ID is provided
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header('Location: products.php');
     exit();
@@ -11,10 +11,11 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $product_id = (int)$_GET['id'];
 
-$database = new Database();
-$pdo = $database->getConnection();
-
+// Get product and handle deletion
 try {
+    $pdo = connectDatabase();
+    
+    // Get product details
     $stmt = $pdo->prepare("SELECT * FROM producten WHERE id = ?");
     $stmt->execute([$product_id]);
     $product = $stmt->fetch();
@@ -23,9 +24,16 @@ try {
         header('Location: products.php');
         exit();
     }
+    
+    // Handle deletion
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $stmt = $pdo->prepare("DELETE FROM producten WHERE id = ?");
+        $stmt->execute([$product_id]);
+        header('Location: products.php?deleted=1');
+        exit();
+    }
 } catch (PDOException $e) {
-    header('Location: products.php');
-    exit();
+    $message = 'Database error: ' . $e->getMessage();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete'])) {

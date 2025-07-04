@@ -1,6 +1,7 @@
 <?php
 require_once 'config/database.php';
 
+// Check if product ID is provided
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header('Location: products.php');
     exit;
@@ -8,26 +9,22 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $product_id = (int) $_GET['id'];
 
-$database = new Database();
-$pdo = $database->getConnection();
-
+// Get product from database
 try {
+    $pdo = connectDatabase();
     $stmt = $pdo->prepare("SELECT * FROM producten WHERE id = ?");
     $stmt->execute([$product_id]);
     $product = $stmt->fetch();
 } catch (PDOException $e) {
     $product = null;
-    $error_message = 'Error fetching product: ' . $e->getMessage();
+    $error_message = 'Error loading product: ' . $e->getMessage();
 }
 
+// Redirect if product not found
 if (!$product) {
     header('Location: products.php');
     exit;
 }
-
-function formatPrice($priceInCents) {
-    if ($priceInCents === null) return 'Prijs op aanvraag';
-    return '€ ' . number_format($priceInCents / 100, 2, ',', '.');
 }
 ?>
 

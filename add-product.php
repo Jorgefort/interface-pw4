@@ -3,50 +3,42 @@ require_once 'config/database.php';
 
 $errors = [];
 $success = false;
-$form_data = [
-    'naam' => '',
-    'omschrijving' => '',
-    'maat' => '',
-    'prijs' => ''
-];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $form_data['naam'] = trim($_POST['naam'] ?? '');
-    $form_data['omschrijving'] = trim($_POST['omschrijving'] ?? '');
-    $form_data['maat'] = $_POST['maat'] ?? '';
-    $form_data['prijs'] = trim($_POST['prijs'] ?? '');
+    $naam = trim($_POST['naam'] ?? '');
+    $omschrijving = trim($_POST['omschrijving'] ?? '');
+    $maat = $_POST['maat'] ?? '';
+    $prijs = trim($_POST['prijs'] ?? '');
     
-    if (empty($form_data['naam'])) {
-        $errors['naam'] = 'Productnaam is verplicht.';
-    } elseif (strlen($form_data['naam']) > 100) {
-        $errors['naam'] = 'Productnaam mag maximaal 100 karakters lang zijn.';
+    // Simple validation
+    if (empty($naam)) {
+        $errors[] = 'Productnaam is verplicht.';
     }
     
-    if (strlen($form_data['omschrijving']) > 500) {
-        $errors['omschrijving'] = 'Omschrijving mag maximaal 500 karakters lang zijn.';
+    if (!empty($maat) && !in_array($maat, ['XS', 'S', 'M', 'L', 'XL'])) {
+        $errors[] = 'Ongeldige maat geselecteerd.';
     }
     
-    if (!empty($form_data['maat']) && !in_array($form_data['maat'], ['XS', 'S', 'M', 'L', 'XL'])) {
-        $errors['maat'] = 'Maat moet een van de volgende zijn: XS, S, M, L, XL.';
+    if (!empty($prijs) && (!is_numeric($prijs) || $prijs < 0)) {
+        $errors[] = 'Prijs moet een geldig bedrag zijn.';
     }
     
-    if (!empty($form_data['prijs'])) {
-        if (!is_numeric($form_data['prijs']) || $form_data['prijs'] < 0) {
-            $errors['prijs'] = 'Prijs moet een geldig bedrag in euro\'s zijn (bijv. 29.99).';
-        } elseif ($form_data['prijs'] > 9999.99) {
-            $errors['prijs'] = 'Prijs mag niet hoger zijn dan €9999.99.';
+    // If no errors, save to database
+    if (empty($errors)) {
+        try {
+            $pdo = connectDatabase();
+            $prijs_in_centen = !empty($prijs) ? round(floatval($prijs) * 100) : null;
+            
+            $stmt = $pdo->prepare("INSERT INTO producten (naam, omschrijving, maat, prijs) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$naam, $omschrijving, $maat ?: null, $prijs_in_centen]);
+            
+            $success = true;
+        } catch (PDOException $e) {
+            $errors[] = 'Database error: ' . $e->getMessage();
         }
     }
-    
-    $uploaded_filename = null;
-    if (isset($_FILES['afbeelding']) && $_FILES['afbeelding']['error'] !== UPLOAD_ERR_NO_FILE) {
-        $file = $_FILES['afbeelding'];
-        
-        if ($file['error'] !== UPLOAD_ERR_OK) {
-            $errors['afbeelding'] = 'Er is een fout opgetreden bij het uploaden van de afbeelding.';
-        } else {
-            $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-            $file_type = mime_content_type($file['tmp_name']);
+}
+?>
             
             if (!in_array($file_type, $allowed_types)) {
                 $errors['afbeelding'] = 'Alleen JPEG, PNG, GIF en WebP afbeeldingen zijn toegestaan.';
